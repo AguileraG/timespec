@@ -79,6 +79,10 @@ struct timespec timespec_from_timeval(struct timeval tv);
 struct timeval timespec_to_timeval(struct timespec ts);
 struct timespec timespec_from_ms(int_least64_t milliseconds);
 int_least64_t timespec_to_ms(struct timespec ts);
+struct timespec timespec_from_us(int_least64_t microseconds);
+int_least64_t timespec_to_us(struct timespec ts);
+struct timespec timespec_from_ns(int_least64_t nanoseconds);
+int_least64_t timespec_to_ns(struct timespec ts);
 
 struct timespec timespec_normalise(struct timespec ts);
 

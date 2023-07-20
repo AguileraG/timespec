@@ -364,6 +364,48 @@ int_least64_t timespec_to_ms(struct timespec ts)
     return (ts.tv_sec * 1000) + (ts.tv_nsec / 1000000);
 }
 
+/** \fn struct timespec timespec_from_us(int_least64_t microseconds)
+ *  \brief Converts an integer number of microseconds to a timespec.
+ */
+struct timespec timespec_from_us(int_least64_t microseconds)
+{
+    struct timespec ts = {
+        .tv_sec = microseconds / 1000000,
+        .tv_nsec = (microseconds % 1000000) * 1000,
+    };
+
+    return timespec_normalise(ts);
+}
+
+/** \fn int_least64_t timespec_to_us(struct timespec ts)
+ *  \brief Converts a timespec to an integer number of microseconds.
+ */
+int_least64_t timespec_to_us(struct timespec ts)
+{
+    return (ts.tv_sec * 1000000) + (ts.tv_nsec / 1000);
+}
+
+/** \fn struct timespec timespec_from_ns(int_least64_t nanoseconds)
+ *  \brief Converts an integer number of nanoseconds to a timespec.
+ */
+struct timespec timespec_from_ns(int_least64_t nanoseconds)
+{
+    struct timespec ts = {
+        .tv_sec = nanoseconds / 1000000000,
+        .tv_nsec = nanoseconds % 1000000000,
+    };
+
+    return timespec_normalise(ts);
+}
+
+/** \fn int_least64_t timespec_to_ns(struct timespec ts)
+ *  \brief Converts a timespec to an integer number of nanoseconds.
+ */
+int_least64_t timespec_to_ns(struct timespec ts)
+{
+    return (ts.tv_sec * 1000000000) + ts.tv_nsec;
+}
+
 /** \fn struct timespec timespec_normalise(struct timespec ts)
  *  \brief Normalises a timespec structure.
  *
