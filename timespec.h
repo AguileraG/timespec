@@ -27,14 +27,31 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  *
  * For more information, please refer to <http://unlicense.org/>
-*/
+ */
 
 #ifndef DAN_TIMESPEC_H
 #define DAN_TIMESPEC_H
 
 #include <stdbool.h>
+#include <stdint.h>
 #include <sys/time.h>
 #include <time.h>
+
+#define TIMESPEC_INIT_FROM_MS(milliseconds)                                             \
+    {                                                                                   \
+        .tv_sec = (milliseconds) / 1000, .tv_nsec = ((milliseconds) % 1000) * 1000000,  \
+    }
+
+#define TIMESPEC_INIT_FROM_US(microseconds)                                             \
+    {                                                                                   \
+        .tv_sec = (microseconds) / 1000000,                                             \
+        .tv_nsec = ((microseconds) % 1000000) * 1000,                                   \
+    }
+
+#define TIMESPEC_INIT_FROM_NS(nanoseconds)                                              \
+    {                                                                                   \
+        .tv_sec = (nanoseconds) / 1000000000, .tv_nsec = (nanoseconds) % 1000000000,    \
+    }
 
 #ifdef __cplusplus
 extern "C" {
@@ -46,9 +63,10 @@ struct timespec timespec_mod(struct timespec ts1, struct timespec ts2);
 
 struct timespec timespec_min(struct timespec ts1, struct timespec ts2);
 struct timespec timespec_max(struct timespec ts1, struct timespec ts2);
-struct timespec timespec_clamp(struct timespec ts1, struct timespec min, struct timespec max);
+struct timespec timespec_clamp(struct timespec ts1, struct timespec min,
+                               struct timespec max);
 
-int  timespec_cmp(struct timespec ts1, struct timespec ts2);
+int timespec_cmp(struct timespec ts1, struct timespec ts2);
 bool timespec_eq(struct timespec ts1, struct timespec ts2);
 bool timespec_gt(struct timespec ts1, struct timespec ts2);
 bool timespec_ge(struct timespec ts1, struct timespec ts2);
@@ -59,8 +77,8 @@ struct timespec timespec_from_double(double s);
 double timespec_to_double(struct timespec ts);
 struct timespec timespec_from_timeval(struct timeval tv);
 struct timeval timespec_to_timeval(struct timespec ts);
-struct timespec timespec_from_ms(long milliseconds);
-long timespec_to_ms(struct timespec ts);
+struct timespec timespec_from_ms(int_least64_t milliseconds);
+int_least64_t timespec_to_ms(struct timespec ts);
 
 struct timespec timespec_normalise(struct timespec ts);
 
