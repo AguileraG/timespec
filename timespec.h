@@ -37,6 +37,11 @@
 #include <sys/time.h>
 #include <time.h>
 
+#define TIMESPEC_INIT_FROM_H(hours)                                                     \
+    {                                                                                   \
+        .tv_sec = (hours) * 3600, .tv_nsec = 0,                                         \
+    }
+
 #define TIMESPEC_INIT_FROM_MS(milliseconds)                                             \
     {                                                                                   \
         .tv_sec = (milliseconds) / 1000, .tv_nsec = ((milliseconds) % 1000) * 1000000,  \
