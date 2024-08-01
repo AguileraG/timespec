@@ -39,12 +39,20 @@
 
 #define TIMESPEC_INIT_FROM_H(hours)                                                     \
     {                                                                                   \
-        .tv_sec = (hours) * 3600, .tv_nsec = 0,                                         \
+        .tv_sec = (hours) * 3600,                                                       \
+        .tv_nsec = 0,                                                                   \
+    }
+
+#define TIMESPEC_INIT_FROM_S(seconds)                                                   \
+    {                                                                                   \
+        .tv_sec = (seconds),                                                            \
+        .tv_nsec = 0,                                                                   \
     }
 
 #define TIMESPEC_INIT_FROM_MS(milliseconds)                                             \
     {                                                                                   \
-        .tv_sec = (milliseconds) / 1000, .tv_nsec = ((milliseconds) % 1000) * 1000000,  \
+        .tv_sec = (milliseconds) / 1000,                                                \
+        .tv_nsec = ((milliseconds) % 1000) * 1000000,                                   \
     }
 
 #define TIMESPEC_INIT_FROM_US(microseconds)                                             \
@@ -55,7 +63,8 @@
 
 #define TIMESPEC_INIT_FROM_NS(nanoseconds)                                              \
     {                                                                                   \
-        .tv_sec = (nanoseconds) / 1000000000, .tv_nsec = (nanoseconds) % 1000000000,    \
+        .tv_sec = (nanoseconds) / 1000000000,                                           \
+        .tv_nsec = (nanoseconds) % 1000000000,                                          \
     }
 
 #ifdef __cplusplus
