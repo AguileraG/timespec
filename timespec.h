@@ -43,6 +43,12 @@
         .tv_nsec = 0,                                                                   \
     }
 
+#define TIMESPEC_INIT_FROM_MIN(minutes)                                                 \
+    {                                                                                   \
+        .tv_sec = (minutes) * 60,                                                       \
+        .tv_nsec = 0,                                                                   \
+    }
+
 #define TIMESPEC_INIT_FROM_S(seconds)                                                   \
     {                                                                                   \
         .tv_sec = (seconds),                                                            \
